@@ -53,11 +53,11 @@ for i in range(10):
       />
       <Button
         onClick={() => {
-          fetch("/run/", {
+          fetch("https://api.hackerearth.com/v3/code/run/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: getParams({
-              client_secret: "609e4ff7825e470eec06d6e604bd692073151faa",
+              client_secret: "a2294e256a2da69d4edddcd61f0a333a55406e6d",
               source: value,
               lang: "PYTHON"
             })
