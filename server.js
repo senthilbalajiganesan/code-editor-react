@@ -1,9 +1,18 @@
 const express = require("express");
 const path = require("path");
 const compression = require("compression");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const fetch = require("node-fetch");
+const https = require("https");
+
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: false
+});
 const app = express();
 app.use(compression());
+app.use(cors());
+app.use(bodyParser.json({ type: "*/*" }));
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "/build")));
 
@@ -21,7 +30,8 @@ app.post("/run", async (req, res) => {
     body: getParams({
       client_secret: "a2294e256a2da69d4edddcd61f0a333a55406e6d",
       source: req.body.source,
-      lang: req.body.lang
+      lang: req.body.lang,
+      agent: httpsAgent
     })
   });
   let data = await response.json();
