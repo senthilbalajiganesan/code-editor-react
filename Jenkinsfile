@@ -6,9 +6,9 @@ pipeline {
 
   }
   stages {
-    stage('') {
+    stage('deploy') {
       steps {
-        sh 'docker build -t code-editor:frontend .'
+        sh 'echo "successfully build"'
       }
     }
 
