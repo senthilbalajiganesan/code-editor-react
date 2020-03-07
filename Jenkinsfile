@@ -6,9 +6,15 @@ pipeline {
 
   }
   stages {
+    stage('build') {
+      steps {
+        sh 'sudo docker build -t code-editor:frontend .'
+      }
+    }
+
     stage('deploy') {
       steps {
-        sh 'echo "successfully build"'
+        sh 'sudo docker run -p 3502:3502 -d code-editor:frontend'
       }
     }
 
