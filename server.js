@@ -38,7 +38,7 @@ app.post("/run", async (req, res) => {
   res.send(data);
 });
 
-app.post("/get/top-ramen", async (req, res) => {
+app.get("/get/top-ramen", async (req, res) => {
   let response = await fetch("http://starlord.hackerearth.com/TopRamen");
   let data = await response.json();
   res.send(data);
