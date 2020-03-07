@@ -38,6 +38,12 @@ app.post("/run", async (req, res) => {
   res.send(data);
 });
 
+app.post("/get/top-ramen", async (req, res) => {
+  let response = await fetch("http://starlord.hackerearth.com/TopRamen");
+  let data = await response.json();
+  res.send(data);
+});
+
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/build/index.html"));
