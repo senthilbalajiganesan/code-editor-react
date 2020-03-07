@@ -1,21 +1,21 @@
 pipeline {
   agent any
   stages {
-    stage('install') {
+    stage('build') {
       steps {
-        sh 'npm i'
+        sh 'sudo docker build -t code-editor:frontend .'
       }
     }
 
-    stage('build') {
+    stage('stop') {
       steps {
-        sh 'npm run build'
+        sh 'sudo docker kill code-editor:frontend'
       }
     }
 
     stage('deploy') {
       steps {
-        sh 'node server.js'
+        sh 'docker run -p 3502:3502 code-editor:frontend'
       }
     }
 
