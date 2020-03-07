@@ -13,13 +13,6 @@ languages.forEach(lang => {
 
 themes.forEach(theme => require(`ace-builds/src-noconflict/theme-${theme}`));
 
-const getParams = (params: any) =>
-  Object.keys(params)
-    .map(key => {
-      return encodeURIComponent(key) + "=" + encodeURIComponent(params[key]);
-    })
-    .join("&");
-
 const CodeEditor = (props: PropsModel) => {
   const [value, changeValue] = useState(`def print_start(n):
   print("*" * n)
@@ -53,11 +46,9 @@ for i in range(10):
       />
       <Button
         onClick={() => {
-          fetch("https://api.hackerearth.com/v3/code/run/", {
+          fetch("/run/", {
             method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: getParams({
-              client_secret: "a2294e256a2da69d4edddcd61f0a333a55406e6d",
+            body: JSON.stringify({
               source: value,
               lang: "PYTHON"
             })
